@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: theme("fontFamily.display");
+    color: theme("colors.primary");
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: theme("colors.accent");
+    color: theme("colors.dark");
+  }
+
+  /* Visible keyboard focus everywhere -- never remove outline without replacing it */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid theme("colors.accent");
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .content-wrap {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8 lg:px-12;
+  }
+}

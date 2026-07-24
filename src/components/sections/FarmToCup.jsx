@@ -18,7 +18,7 @@ export default function FarmToCup() {
         eyebrow="Our Process"
         title="Farm to Cup"
         dark
-        description="Six stages, the same care at every one -- from the farms we've chosen to the delivery on your dock."
+        description="Six stages, the same care at every one, from the farms we've chosen to the delivery on your dock."
       />
 
       <div ref={ref} className="relative mx-auto max-w-2xl">

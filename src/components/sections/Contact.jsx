@@ -18,7 +18,7 @@ export default function Contact() {
         align="left"
         eyebrow="Get In Touch"
         title="Request a Sample"
-        description="Tell us about your business and volume -- we'll follow up with a sample and a quote."
+        description="Tell us about your business and volume, we'll follow up with a sample and a quote."
       />
 
       <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">

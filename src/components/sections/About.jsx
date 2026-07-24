@@ -14,7 +14,7 @@ export default function About() {
             Sourced with intent. Roasted with restraint.
           </h2>
           <blockquote className="my-8 border-l-2 border-accent pl-6 font-display text-2xl italic text-secondary">
-            "We work directly with a small circle of growers -- not a commodity market -- because
+            "We work directly with a small circle of growers, not a commodity market, because
             consistency starts at the farm, not the roaster."
           </blockquote>
           <p className="text-base leading-relaxed text-primary/75 sm:text-lg">

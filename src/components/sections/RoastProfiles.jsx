@@ -23,7 +23,7 @@ export default function RoastProfiles() {
       <SectionHeading
         eyebrow="Roast Profiles"
         title="Eight profiles, light to Italian"
-        description="Roast depth changes the whole cup -- acidity, body, sweetness. Choose a starting profile, or we'll dial one in for your machine."
+        description="Roast depth changes the whole cup, acidity, body, sweetness. Choose a starting profile, or we'll dial one in for your machine."
       />
 
       {/* Gradient spectrum bar -- desktop only, purely illustrative */}
@@ -48,7 +48,7 @@ export default function RoastProfiles() {
                 style={{ backgroundColor: intensityColor[r.intensity] }}
                 aria-hidden="true"
               />
-              <h3 className="mb-1 text-sm font-semibold">{r.name}</h3>
+              <h3 className="mb-1 text-lg font-semibold">{r.name}</h3>
               <p className="text-xs leading-relaxed text-primary/60">{r.note}</p>
             </div>
           </RevealOnScroll>

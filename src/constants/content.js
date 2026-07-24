@@ -85,9 +85,9 @@ export const farmToCupStages = [
 ];
 
 export const contactInfo = {
-  phone: "+91 98765 43210",
-  email: "sales@viceroycoffees.com",
-  address: "12 Plantation Road, Coorg, Karnataka, India",
+  phone: "+91 92845 65646",
+  email: "viceroy.coffees@gmail.com",
+  address: "Mayuresh Park, 6, Gangapur Rd, opposite vishwas bank, Sharda Nagar, Savarkar Nagar, Nashik, Maharashtra 422013",
 };
 
 export const footerLinks = {

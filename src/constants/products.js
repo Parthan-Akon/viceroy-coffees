@@ -3,7 +3,7 @@ export const products = [
     id: "arabica-100",
     name: "100% Arabica",
     ratio: { arabica: 100, robusta: 0 },
-    note: "Bright, aromatic, gently acidic -- for buyers who want nuance in the cup.",
+    note: "Bright, aromatic, gently acidic for buyers who want nuance in the cup.",
     featured: false,
   },
   {
@@ -25,7 +25,7 @@ export const products = [
     id: "robusta-100",
     name: "100% Robusta",
     ratio: { arabica: 0, robusta: 100 },
-    note: "Bold, high-crema, built for strength -- a filter and instant-blend favourite.",
+    note: "Bold, high-crema, built for strength, a filter and instant-blend favourite.",
     featured: false,
   },
 ];

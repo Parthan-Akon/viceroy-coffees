@@ -47,7 +47,13 @@ export default function Footer() {
             <li>{contactInfo.email}</li>
             <li className="flex gap-4 pt-2">
               {footerLinks.social.map((s) => (
-                <a key={s.label} href={s.href} className="hover:text-accent">
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("http") ? "_blank" : undefined}
+                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="hover:text-accent"
+                >
                   {s.label}
                 </a>
               ))}

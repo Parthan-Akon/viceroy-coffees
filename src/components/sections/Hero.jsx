@@ -40,7 +40,7 @@ export default function Hero() {
           src={logo}
           alt=""
           aria-hidden="true"
-          className="mb-8 h-20 w-auto opacity-95 sm:h-24"
+          className="mb-8 h-32 w-auto opacity-95 sm:h-40"
         />
 
         <motion.h1

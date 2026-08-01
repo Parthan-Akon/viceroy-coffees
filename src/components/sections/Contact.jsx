@@ -67,9 +67,24 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Map placeholder -- swap for a real embed when the address is final */}
-          <div className="flex aspect-video w-full items-center justify-center rounded-md border border-primary/10 bg-primary/[0.04] text-sm text-primary/40">
-            Map placeholder
+          {/* Interactive Map Embed */}
+          <div className="overflow-hidden rounded-md border border-primary/10 bg-primary/[0.04] aspect-video w-full relative group">
+            <iframe
+              title="Viceroy Coffees Location Map"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                contactInfo.address
+              )}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+              width="100%"
+              height="100%"
+              style={{
+                border: 0,
+                filter: "grayscale(30%) contrast(95%) sepia(25%) hue-rotate(340deg) brightness(95%)"
+              }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="absolute inset-0 h-full w-full opacity-90 transition-all duration-300 group-hover:opacity-100 group-hover:filter-none"
+            />
           </div>
         </RevealOnScroll>
       </div>

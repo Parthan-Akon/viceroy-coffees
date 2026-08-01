@@ -50,19 +50,19 @@ export const whyChooseUs = [
     icon: FaSlidersH,
     title: "Custom Roast Profiles",
     desc: "Eight profiles, or a curve built for your equipment.",
-    primary: false,
+    primary: true,
   },
   {
     icon: FaBoxes,
     title: "Bulk Supply",
     desc: "Reliable volume for multi-location operations.",
-    primary: false,
+    primary: true,
   },
   {
     icon: FaCheckCircle,
     title: "Consistent Quality",
     desc: "The same cup, shipment after shipment.",
-    primary: false,
+    primary: true,
   },
 ];
 
@@ -93,8 +93,6 @@ export const contactInfo = {
 export const footerLinks = {
   quick: nav.links,
   social: [
-    { label: "Instagram", href: "#" },
-    { label: "LinkedIn", href: "#" },
-    { label: "Facebook", href: "#" },
+    { label: "Instagram", href: "https://www.instagram.com/viceroycoffees" },
   ],
 };

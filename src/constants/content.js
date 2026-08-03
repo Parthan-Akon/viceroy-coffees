@@ -31,7 +31,7 @@ export const whyChooseUs = [
   {
     icon: FaSeedling,
     title: "Carefully Selected Farms",
-    desc: "Direct relationships with growers across South India.",
+    desc: "Direct relationships with farmers across South India.",
     primary: true,
   },
   {
@@ -76,7 +76,7 @@ export const industries = [
 ];
 
 export const farmToCupStages = [
-  { title: "Selected Farms", desc: "Growers chosen for consistency, not just yield." },
+  { title: "Selected Farms", desc: "Farmers chosen for consistency, not just yield." },
   { title: "Processing", desc: "Washed and sorted to protect the bean's integrity." },
   { title: "Roasting", desc: "Small-batch roasting to your exact profile." },
   { title: "Quality Check", desc: "Every batch cupped before it ships." },

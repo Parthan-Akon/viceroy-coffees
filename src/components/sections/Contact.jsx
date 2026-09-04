@@ -1,4 +1,6 @@
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaCheckCircle, FaExclamationCircle, FaSpinner } from "react-icons/fa";
 import RevealOnScroll from "../ui/RevealOnScroll.jsx";
 import SectionHeading from "../ui/SectionHeading.jsx";
 import Section from "../layout/Section.jsx";
@@ -6,12 +8,55 @@ import Button from "../ui/Button.jsx";
 import { contactInfo } from "../../constants/content.js";
 
 const fields = [
-  { id: "name", label: "Name", type: "text" },
-  { id: "company", label: "Company", type: "text" },
-  { id: "email", label: "Email", type: "email" },
+  { id: "name", label: "Name", type: "text", required: true },
+  { id: "company", label: "Company", type: "text", required: false },
+  { id: "email", label: "Email", type: "email", required: true },
 ];
 
+const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
 export default function Contact() {
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+
+    // Honeypot: bots tend to fill every field, humans never see this one.
+    // (checkboxes always report value="on" regardless of checked state, so use .checked)
+    if (form.botcheck.checked) return;
+
+    setStatus("sending");
+
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      subject: "New Sample Request - Viceroy Coffees",
+      from_name: "Viceroy Coffees Website",
+      name: form.name.value,
+      company: form.company.value,
+      email: form.email.value,
+      message: form.message.value,
+    };
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <Section id="contact">
       <SectionHeading
@@ -23,34 +68,86 @@ export default function Contact() {
 
       <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
         <RevealOnScroll>
-          <form className="flex flex-col gap-5" onSubmit={(e) => e.preventDefault()}>
-            {fields.map((f) => (
-              <div key={f.id}>
-                <label htmlFor={f.id} className="mb-1.5 block text-xs font-medium text-primary/70">
-                  {f.label}
+          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
+
+            <fieldset disabled={status === "sending"} className="flex flex-col gap-5 disabled:opacity-60">
+              {fields.map((f) => (
+                <div key={f.id}>
+                  <label htmlFor={f.id} className="mb-1.5 block text-xs font-medium text-primary/70">
+                    {f.label}
+                  </label>
+                  <input
+                    id={f.id}
+                    name={f.id}
+                    type={f.type}
+                    required={f.required}
+                    className="w-full rounded-sm border border-primary/20 bg-white px-4 py-3 text-sm focus:border-secondary"
+                  />
+                </div>
+              ))}
+              <div>
+                <label htmlFor="message" className="mb-1.5 block text-xs font-medium text-primary/70">
+                  Message
                 </label>
-                <input
-                  id={f.id}
-                  type={f.type}
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
                   required
+                  placeholder="Roast preference, volume, delivery frequency..."
                   className="w-full rounded-sm border border-primary/20 bg-white px-4 py-3 text-sm focus:border-secondary"
                 />
               </div>
-            ))}
-            <div>
-              <label htmlFor="message" className="mb-1.5 block text-xs font-medium text-primary/70">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                placeholder="Roast preference, volume, delivery frequency..."
-                className="w-full rounded-sm border border-primary/20 bg-white px-4 py-3 text-sm focus:border-secondary"
-              />
-            </div>
-            <Button type="submit" variant="primary" className="mt-2 w-fit">
-              Request a Sample
+            </fieldset>
+
+            <Button type="submit" variant="primary" className="mt-2 w-fit" disabled={status === "sending"}>
+              {status === "sending" ? (
+                <>
+                  <FaSpinner className="animate-spin" /> Sending...
+                </>
+              ) : (
+                "Request a Sample"
+              )}
             </Button>
+
+            <AnimatePresence mode="wait">
+              {status === "success" && (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-start gap-3 rounded-sm border border-green-600/20 bg-green-600/5 px-4 py-3"
+                >
+                  <FaCheckCircle className="mt-0.5 shrink-0 text-green-700" />
+                  <p className="text-sm text-green-800">
+                    Request received! Thank you for reaching out — our team will review your details and get back to
+                    you shortly with a sample and quote.
+                  </p>
+                </motion.div>
+              )}
+              {status === "error" && (
+                <motion.div
+                  key="error"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex items-start gap-3 rounded-sm border border-red-600/20 bg-red-600/5 px-4 py-3"
+                >
+                  <FaExclamationCircle className="mt-0.5 shrink-0 text-red-700" />
+                  <p className="text-sm text-red-800">
+                    Something went wrong sending your request. Please try again, or email us directly at{" "}
+                    <a href={`mailto:${contactInfo.email}`} className="underline">
+                      {contactInfo.email}
+                    </a>
+                    .
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </form>
         </RevealOnScroll>
 
